@@ -3,6 +3,7 @@ package org.semgus.sketch.base;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -95,5 +96,40 @@ public sealed interface Expr extends Syntax {
 
   static @NotNull Expr forall(@NotNull List<Param> binds, @NotNull Expr e) {
     return new Forall(binds, e);
+  }
+
+  static private Expr subHelper(Expr expr, Map<String, Param> oldToNew) {
+    if (expr instanceof Expr.Ref && oldToNew.containsKey(((Ref) expr).id.name()))
+      return Expr.ref(Id.plain(oldToNew.get(((Ref) expr).id.name()).id().name()));
+    if (expr instanceof Expr.Ref || expr instanceof Expr.Get)
+      return expr;
+    if (expr instanceof Expr.App)
+      return Expr.app(
+        ((App) expr).fn,
+        ((App) expr).args
+          .stream()
+          .map(x->subHelper(x, oldToNew))
+          .toList()
+      );
+    if (expr instanceof Expr.Assign)
+      return Expr.assign(((Assign) expr).id, subHelper(((Assign) expr).e, oldToNew));
+    if (expr instanceof Expr.Unary)
+      return Expr.unary(((Unary) expr).op, subHelper(((Unary) expr).e, oldToNew));
+    if (expr instanceof Expr.Binary)
+      return Expr.binary(((Binary) expr).op, subHelper(((Binary) expr).l, oldToNew), subHelper(((Binary) expr).r, oldToNew));
+    if (expr instanceof  Expr.Cond)
+      return Expr.cond(
+        subHelper(((Cond) expr).i, oldToNew),
+        subHelper(((Cond) expr).t, oldToNew),
+        subHelper(((Cond) expr).e, oldToNew)
+      );
+    if (expr instanceof  Expr.Choice)
+      return Expr.choice(((Choice) expr).es.stream().map(x->subHelper(x, oldToNew)).toList());
+    if (expr instanceof Expr.Forall)
+      return Expr.forall(((Forall) expr).binds, subHelper(((Forall) expr).e, oldToNew));
+    throw new RuntimeException("This is unreachable");
+  }
+  static @NotNull Expr subWithNewVar(Expr e, Map<String, Param> oldToNew) {
+    return subHelper(e, oldToNew);
   }
 }

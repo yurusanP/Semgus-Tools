@@ -96,12 +96,11 @@
 ;;; Constraints - forall
 ;;;
 (constraint (forall ((x Int) (y Int) (r Int))
-    (=
+    (and
         (E.Sem max2 x y r)
         (and
             (or (= x r) (= y r))
-            (>= r x)
-            (>= r y)
+            (and (>= r x) (>= r y))
         )
     )
 ))

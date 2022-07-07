@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface Distiller {
-  static @NotNull Code distill(@NotNull Syntax x) {
+  static @NotNull Code distill( Syntax x) {
+    if (x == null)
+      return new Code.Char('$');
     return switch (x) {
       case Id xId -> {
         var res = Code.plain(xId.name());

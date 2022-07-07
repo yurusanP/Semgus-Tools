@@ -5,63 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc2298f5-0a02-462c-982f-6b60498d2075" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/deps.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-parser-util/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-parser-util/src/main/java/org/semgus/parser/util/Runner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-parser-util/src/main/resources/bin/semgus-parser-linux" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-parser-util/src/main/resources/bin/semgus-parser-osx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-parser-util/src/main/resources/bin/semgus-parser-win.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-parser-util/src/test/java/RunTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-pretty/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/Code.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/Prettiable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/Prettier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/SimpleCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/Sketch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Expr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Id.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/IdAttr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Param.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Stmt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Syntax.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/IR.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminalMkr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/Rule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/RuleMkr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/Target.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/Var.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/NTGenMkr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/RuleDefMkr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/Translator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Evaluator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Pair.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/test/java/BasicTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-test-util/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-test-util/src/main/java/org/semgus/test/util/TestResources.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/max2-exp-forall.sl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/max2-exp.sl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/max2-pair.sl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/sum-by-while.sl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semgus-test-util/src/main/resources/playground/max2-exp.sk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/google-java-format.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/HarnessMkr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Expr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/Translator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/max2-exp-forall.sl" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/max2-exp-forall.sl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +61,46 @@
                 <item name="buildSrc" type="2d1252cf:ModuleNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="semgus-tools" type="f1a62948:ProjectNode" />
+                <item name="semgus-sketch" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="semgus-tools" type="f1a62948:ProjectNode" />
+                <item name="semgus-sketch" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="semgus-tools" type="f1a62948:ProjectNode" />
+                <item name="semgus-sketch" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="semgus-tools" type="f1a62948:ProjectNode" />
+                <item name="semgus-sketch" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="runtimeClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="semgus-tools" type="f1a62948:ProjectNode" />
+                <item name="semgus-sketch" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="testCompileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="semgus-tools" type="f1a62948:ProjectNode" />
+                <item name="semgus-sketch" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="testCompileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+                <item name="project semgus-pretty" type="b3323d55:ExternalSystemViewDefaultContributor$DependencyExternalSystemNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -145,40 +136,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/Users/yurusanp/Documents/GitHub/SemGuS-git/semgus-tools/semgus-pretty",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.18642116",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/labelray/Semgus-Tools/semgus-parser-util/src/main/resource/bin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.18642116&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/semgus-parser-util/src/main/resource/bin" />
+      <recent name="$PROJECT_DIR$/semgus-test-util/src/main/resources/bin" />
       <recent name="$PROJECT_DIR$/semgus-pretty" />
       <recent name="$PROJECT_DIR$/semgus-java" />
       <recent name="$PROJECT_DIR$/semgus-sketch" />
-      <recent name="$PROJECT_DIR$/parser/src/main/resources/benchmarks/basic" />
-      <recent name="$PROJECT_DIR$/parser/src/main/resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/semgus-parser-util/src/main/resources" />
+      <recent name="$PROJECT_DIR$/semgus-parser-util/src/main" />
+      <recent name="$PROJECT_DIR$/semgus-parser-util/src/main/java" />
       <recent name="$PROJECT_DIR$/semgus-parser-util/src/main/resources/bin" />
       <recent name="$PROJECT_DIR$/parser-util" />
-      <recent name="$PROJECT_DIR$/gradle" />
-      <recent name="$PROJECT_DIR$/test-util/src/main/resources" />
-      <recent name="$PROJECT_DIR$/parser/src/test/resources/benchmarks" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.semgus.sketch.util" />
@@ -197,7 +188,7 @@
       <command value="gradle build" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.BasicTest.testMax2Exp">
+  <component name="RunManager" selected="Gradle.BasicTest.testMax2ExpForall (1)">
     <configuration name="BasicTest.testMax2Exp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -221,7 +212,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BasicTest.testMax2ExpForall" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BasicTest.testMax2ExpForall (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -313,10 +304,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BasicTest.testMax2ExpForall (1)" />
         <item itemvalue="Gradle.BasicTest.testMax2Exp" />
-        <item itemvalue="Gradle.BasicTest.testSumByWhile" />
-        <item itemvalue="Gradle.BasicTest.testMax2ExpForall" />
         <item itemvalue="Gradle.BasicTest.testMax2Pair" />
+        <item itemvalue="Gradle.BasicTest.testSumByWhile" />
         <item itemvalue="Gradle.semgus-tools [build]" />
       </list>
     </recent_temporary>
@@ -331,6 +322,8 @@
       <updated>1655952647299</updated>
       <workItem from="1655952648957" duration="28916000" />
       <workItem from="1656358343773" duration="124883000" />
+      <workItem from="1657045085573" duration="8384000" />
+      <workItem from="1657161445783" duration="4747000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656069840439</created>
@@ -377,8 +370,19 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="6" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/Translator.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.util.stream.ReferencePipeline$3" memberName="depth" />
+        <PinnedItemInfo parentTag="java.util.stream.ReferencePipeline$3" memberName="nextStage" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
