@@ -15,7 +15,7 @@ class Sketch {
   fun dump() = syntax.codify().stringPretty()
 
   companion object {
-    fun fromSemgusProblem(semgusProblem: SemgusProblem, bnd: Int): Sketch {
+    fun fromSemgusProblem(semgusProblem: SemgusProblem, bnd: Long): Sketch {
       val sketchProblem = semgusProblem.toSketchProblem()
       return Sketch().apply {
         this.syntax = SyntaxBuilder(sketchProblem, bnd).build()

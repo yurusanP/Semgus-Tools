@@ -16,6 +16,8 @@ internal fun skip() = Stmt.Skip
 
 internal fun varDef(decl: Param, init: Expr) = Stmt.VarDef(decl, init)
 
+internal fun bndDef(bnd: Long) = varDef(intPlain("bnd"), refPlain(bnd))
+
 internal fun fnDef(decl: Param, params: Sequence<Param>, body: Stmt) = Stmt.FnDef(decl, params, body)
 
 internal fun structDef(id: Id, fields: Sequence<Param>) = Stmt.StructDef(id, fields)
@@ -30,3 +32,7 @@ internal fun aReturn(e: Expr) = atomic(idPlain("return"), e)
 internal fun seq(ss: Sequence<Stmt>) = Stmt.Seq(ss)
 internal fun sBndChked(ss: Sequence<Stmt>) = seq(sequenceOf(aBndChk()) + ss)
 internal fun sBndChked(s: Stmt) = seq(sequenceOf(aBndChk(), s))
+
+internal fun sBndDefed(ss: Sequence<Stmt>, bnd: Long) = seq(sequenceOf(bndDef(bnd)) + ss)
+
+internal fun sBndDefed(s: Stmt, bnd: Long) = seq(sequenceOf(bndDef(bnd), s))

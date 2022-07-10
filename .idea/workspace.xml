@@ -5,39 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc2298f5-0a02-462c-982f-6b60498d2075" name="Changes" comment="refactor: pretty and most parts of sketch">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/google-java-format.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/Code.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/Prettiable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/Prettier.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-pretty/src/main/java/org/semgus/pretty/SimpleCode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/Sketch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Expr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Id.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/IdAttr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Param.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Stmt.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/base/Syntax.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/IR.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminalMkr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/Rule.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/RuleMkr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/Target.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/Var.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/HarnessMkr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/NTGenMkr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/RuleDefMkr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/translator/Translator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Evaluator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Pair.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-test-util/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-test-util/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-test-util/src/main/java/org/semgus/test/util/TestResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-test-util/src/main/java/org/semgus/test/util/TestResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/max2-exp-forall.sl" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-test-util/src/main/resources/benchmarks/basic/max2-exp-forall.sl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/Sketch.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/Sketch.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/syntax/Stmt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/syntax/Stmt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/SyntaxBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/SyntaxBuilder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,26 +99,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/Users/yurusanp/Documents/GitHub/SemGuS-git/semgus-tools/semgus-pretty",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.18642116",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.VCS"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/yurusanp/Documents/GitHub/SemGuS-git/semgus-tools/semgus-pretty&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.18642116&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.VCS&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/semgus-pretty" />
@@ -318,6 +289,7 @@
       <workItem from="1656986063841" duration="2697000" />
       <workItem from="1657167284643" duration="606000" />
       <workItem from="1657177357686" duration="16553000" />
+      <workItem from="1657469597371" duration="2010000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656069840439</created>
@@ -347,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657433707411</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="refactor: pretty and most parts of sketch">
+      <created>1657433869511</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1657433869511</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
