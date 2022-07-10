@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc2298f5-0a02-462c-982f-6b60498d2075" name="Changes" comment="refactor: pretty and most parts of sketch">
+    <list default="true" id="cc2298f5-0a02-462c-982f-6b60498d2075" name="Changes" comment="fix: params map in IR non-terminal">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminal.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Evaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Evaluator.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/NTStmtsBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/NTStmtsBuilder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/SyntaxBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/SyntaxBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Translator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Translator.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +153,7 @@
       <command value="gradle build" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.BasicTest.testMax2ExpForall">
+  <component name="RunManager" selected="Gradle.BasicTest.testMax2Pair">
     <configuration name="BasicTest.testMax2Exp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -269,11 +269,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BasicTest.testMax2ExpForall" />
-        <item itemvalue="Gradle.BasicTest.testSumByWhile" />
-        <item itemvalue="Gradle.semgus-tools [build]" />
         <item itemvalue="Gradle.BasicTest.testMax2Pair" />
+        <item itemvalue="Gradle.BasicTest.testSumByWhile" />
         <item itemvalue="Gradle.BasicTest.testMax2Exp" />
+        <item itemvalue="Gradle.BasicTest.testMax2ExpForall" />
+        <item itemvalue="Gradle.semgus-tools [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -328,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657433869511</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix: params map in IR non-terminal">
+      <created>1657485984123</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1657485984123</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +358,8 @@
     </ignored-roots>
     <MESSAGE value="first commit" />
     <MESSAGE value="refactor: pretty and most parts of sketch" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: pretty and most parts of sketch" />
+    <MESSAGE value="fix: params map in IR non-terminal" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: params map in IR non-terminal" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

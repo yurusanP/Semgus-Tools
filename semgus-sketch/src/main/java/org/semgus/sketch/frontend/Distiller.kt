@@ -46,12 +46,12 @@ internal fun Syntax.distill(): Code = when (this) {
       this.r.distill(),
     ),
   )
-  is Expr.Nary -> parens(
-    hsepDelim(
-      plain(this.op.s),
-      this.es.distill(),
-    ),
-  )
+  is Expr.Nary -> hsepDelim(
+    plain(this.op.s),
+    this.es.distill(),
+  ).let {
+    if (this.es.count() == 1) it else parens(it)
+  }
   is Expr.Ite -> parens(
     hsep(
       this.i.distill(),
@@ -67,7 +67,7 @@ internal fun Syntax.distill(): Code = when (this) {
     plain('|'),
     this.es.distill(),
   )
-  is Expr.Forall -> throw IllegalStateException("The forall expression should not be printed.")
+  is Expr.Forall -> this.e.distill()
 
   Stmt.Skip -> empty()
   is Stmt.VarDef -> semi(

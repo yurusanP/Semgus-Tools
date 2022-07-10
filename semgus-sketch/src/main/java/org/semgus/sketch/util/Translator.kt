@@ -7,11 +7,7 @@ import org.semgus.java.problem.SemgusNonTerminal
 import org.semgus.java.problem.SemgusProblem
 import org.semgus.java.problem.SemgusProduction
 import org.semgus.sketch.ir.*
-import org.semgus.sketch.ir.Target
-import org.semgus.sketch.syntax.Expr
-import org.semgus.sketch.syntax.Param
-import org.semgus.sketch.syntax.id
-import org.semgus.sketch.syntax.paramPlain
+import org.semgus.sketch.syntax.*
 
 /**
  * Translates a SemGuS problem into a sketch problem.
@@ -33,6 +29,29 @@ internal fun SemgusProblem.toSketchProblem(): Problem {
   val target = nts[targetRelName]
     ?.let { Target(this.targetName, it) }
     ?: throw NoSuchElementException("Cannot find target in the non-terminal map.")
+
+  /* TODO: More generally, the evaluated expression should carry more info
+   *       like how we could build the target variable definition.
+   *       The evaluation strategy would be implemented in another PR.
+   *       This is just a workaround for now.
+   *       Also, avoid global state mutation...
+   */
+  fns[target.nt.relName] = {
+    nary(
+      Op.AND,
+      target.nt.outputs().map { v ->
+        binary(
+          Op.EQ,
+          get(
+            idPlain("target"),
+            idPlain(v.id.name),
+          ),
+          refPlain(v.id.name),
+        )
+      },
+    )
+  }
+  fns[target.name] = { refPlain("") }
 
   val constraints = this.constraints.asSequence()
     .map { it.toExpr() }

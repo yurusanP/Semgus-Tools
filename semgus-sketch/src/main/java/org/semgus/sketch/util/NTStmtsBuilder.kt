@@ -23,7 +23,7 @@ internal data class NTStmtsBuilder(
     return sequenceOf(typeDef, ntDef()) + ruleDefs
   }
 
-  private fun ntDef(): Stmt.FnDef {
+  private fun ntDef(): Stmt {
     val choice = choice(
       (0..rules.count()).asSequence()
         .map { id(nt.name) { withRuleIndex(it) } }

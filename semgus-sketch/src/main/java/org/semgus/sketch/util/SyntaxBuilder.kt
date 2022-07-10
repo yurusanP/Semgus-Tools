@@ -8,7 +8,7 @@ internal data class SyntaxBuilder(val problem: Problem, val bnd: Long) {
     val ntsStmts = problem.nts.keys.asSequence()
       .flatMap { ntStmtsBuilder(syntaxBuilder = this, relName = it).build() }
 
-    fun targetDef(): Stmt.FnDef {
+    fun targetDef(): Stmt {
       val inputs = problem.target.nt.inputs()
       return fnDef(
         decl = paramPlain(
@@ -23,14 +23,31 @@ internal data class SyntaxBuilder(val problem: Problem, val bnd: Long) {
               args = argsBnded0(inputs.map(::ref)),
             ),
           ),
-          bnd
-        )
+          bnd,
+        ),
       )
     }
 
-    // TODO: Harness
-    val harnessDef = skip()
+    fun harnessDef(): Stmt {
+      // TODO: What about more than 1 forall... Or hybrid ones...?
+      val forall = problem.constraints.singleOrNull().let {
+        if (it is Expr.Forall) it else null
+      }
 
-    return seq(ntsStmts + targetDef() + harnessDef)
+      return fnDef(
+        decl = paramPlain(
+          type = id("void") { withHarness() },
+          name = "sketch",
+        ),
+        params = forall?.binds ?: emptySequence(),
+        body = seq(
+          problem.constraints.map { constraint ->
+            aAssert(constraint)
+          },
+        ),
+      )
+    }
+
+    return seq(ntsStmts + targetDef() + harnessDef())
   }
 }

@@ -13,7 +13,7 @@ import org.semgus.sketch.syntax.*
  * Evaluates SMT terms to Sketch expressions.
  */
 internal fun SmtTerm.toExpr(): Expr = when (this) {
-  is Application -> (fns[this.name.name] ?: { appPlain(fnName = this.name.name, args = it.asSequence()) })
+  is Application -> (fns[this.name.name] ?: TODO("Not supported theory $this"))
     .invoke(
       this.arguments.asSequence()
         .map(TypedTerm::term)
@@ -34,13 +34,13 @@ internal fun SmtTerm.toExpr(): Expr = when (this) {
 /**
  * The helper map for evaluation.
  */
-private val fns = mapOf<String, (List<Expr>) -> Expr>(
+internal val fns = mutableMapOf<String, (List<Expr>) -> Expr>(
   // Core Theory
   "true" to { refPlain("true") },
   "false" to { refPlain("false") },
   // TODO: Support Nary.
-  "and" to { (l, r) -> binary(Op.AND, l, r) },
-  "or" to { (l, r) -> binary(Op.OR, l, r) },
+  "and" to { es -> nary(Op.AND, es.asSequence()) },
+  "or" to { es -> nary(Op.OR, es.asSequence()) },
   "not" to { (x) -> unary(Op.NOT, x) },
   "!" to { (x) -> unary(Op.NOT, x) },
   "xor" to { (l, r) -> binary(Op.XOR, l, r) },
