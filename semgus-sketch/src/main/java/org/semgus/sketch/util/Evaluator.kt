@@ -13,20 +13,20 @@ import org.semgus.sketch.syntax.*
  * Evaluates SMT terms to Sketch expressions.
  */
 internal fun SmtTerm.toExpr(): Expr = when (this) {
-  is Application -> (fns[this.name.name] ?: TODO("Not supported theory $this"))
+  is Application -> (fns[this.name().name()] ?: TODO("Not supported theory $this"))
     .invoke(
-      this.arguments.asSequence()
+      this.arguments().asSequence()
         .map(TypedTerm::term)
         .map(SmtTerm::toExpr)
         .toList(),
     )
-  is Variable -> refPlain(this.name)
-  is CNumber -> refPlain(this.value)
-  is CString -> refPlain(this.value)
+  is Variable -> refPlain(this.name())
+  is CNumber -> refPlain(this.value())
+  is CString -> refPlain(this.value())
   // TODO: What about exists?
   is Quantifier -> forall(
-    binds = this.bindings.asSequence().map { typedVar -> param(typedVar) },
-    e = this.child.toExpr(),
+    binds = this.bindings().asSequence().map { typedVar -> param(typedVar) },
+    e = this.child().toExpr(),
   )
   else -> throw IllegalStateException("Unexpected value: $this")
 }
@@ -38,7 +38,6 @@ internal val fns = mutableMapOf<String, (List<Expr>) -> Expr>(
   // Core Theory
   "true" to { refPlain("true") },
   "false" to { refPlain("false") },
-  // TODO: Support Nary.
   "and" to { es -> nary(Op.AND, es.asSequence()) },
   "or" to { es -> nary(Op.OR, es.asSequence()) },
   "not" to { (x) -> unary(Op.NOT, x) },

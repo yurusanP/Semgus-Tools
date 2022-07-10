@@ -19,10 +19,10 @@ internal fun idPlain(n: Long) = idPlain(n.toString())
 
 // TODO: Should investigate later.
 internal fun id(identifier: Identifier): Id {
-  val name = when (identifier.name) {
+  val name = when (identifier.name()) {
     "Int" -> "int"
     "Bool" -> "bit"
-    else -> identifier.name
+    else -> identifier.name()
   }
 
 //   TODO: Useful for bit vectors.

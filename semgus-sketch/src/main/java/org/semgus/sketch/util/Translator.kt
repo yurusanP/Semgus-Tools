@@ -13,21 +13,21 @@ import org.semgus.sketch.syntax.*
  * Translates a SemGuS problem into a sketch problem.
  */
 internal fun SemgusProblem.toSketchProblem(): Problem {
-  val nts = this.nonTerminals.values.asSequence()
+  val nts = this.nonTerminals().values.asSequence()
     .map { it.toSketchNonTerminal() }
     .associateBy(NonTerminal::relName)
 
-  val rules = this.nonTerminals.values.asSequence()
+  val rules = this.nonTerminals().values.asSequence()
     .map { semgusNT ->
-      semgusNT.productions.values.asSequence()
+      semgusNT.productions().values.asSequence()
         .flatMap(SemgusProduction::semanticRules)
         .map { it.toSketchRule(nts) }
     }
     .associateBy { rules -> rules.first().nt.relName }
 
-  val targetRelName = this.targetNonTerminal.firstSemRule().head.name
+  val targetRelName = this.targetNonTerminal().firstSemRule().head().name()
   val target = nts[targetRelName]
-    ?.let { Target(this.targetName, it) }
+    ?.let { Target(this.targetName(), it) }
     ?: throw NoSuchElementException("Cannot find target in the non-terminal map.")
 
   /* TODO: More generally, the evaluated expression should carry more info
@@ -53,7 +53,7 @@ internal fun SemgusProblem.toSketchProblem(): Problem {
   }
   fns[target.name] = { refPlain("") }
 
-  val constraints = this.constraints.asSequence()
+  val constraints = this.constraints().asSequence()
     .map { it.toExpr() }
 
   return Problem(
@@ -70,9 +70,9 @@ internal fun SemgusProblem.toSketchProblem(): Problem {
 internal fun SemgusNonTerminal.toSketchNonTerminal(): NonTerminal {
   val firstSemRule = this.firstSemRule()
 
-  val fullVars = firstSemRule.head.arguments.asSequence()
+  val fullVars = firstSemRule.head().arguments().asSequence()
     .map { typedVar ->
-      firstSemRule.variables[typedVar.name]
+      firstSemRule.variables()[typedVar.name()]
         ?.let { typedVar to it }
         ?: throw NoSuchElementException("Cannot find matching annotated variables")
     }
@@ -81,8 +81,8 @@ internal fun SemgusNonTerminal.toSketchNonTerminal(): NonTerminal {
     .map { (typedVar, annVar) ->
       Var(
         param(typedVar),
-        typedVar.name,
-        annVar.attributes.keys,
+        typedVar.name(),
+        annVar.attributes().keys,
       )
     }
 
@@ -90,7 +90,7 @@ internal fun SemgusNonTerminal.toSketchNonTerminal(): NonTerminal {
     fullVars
       .map { (typedVar, annVar) -> param(typedVar = typedVar) to annVar }
       .forEach { (param, annVar) ->
-        annVar.attributes.keys.forEach { attr ->
+        annVar.attributes().keys.forEach { attr ->
           this.putIfAbsent(attr, mutableListOf())
           this[attr]!!.add(param)
         }
@@ -98,8 +98,8 @@ internal fun SemgusNonTerminal.toSketchNonTerminal(): NonTerminal {
   }.mapValues { (_, mutable) -> mutable.asSequence() }
 
   return NonTerminal(
-    this.name,
-    firstSemRule.head.name,
+    this.name(),
+    firstSemRule.head().name(),
     ordVars,
     params,
   )
@@ -111,18 +111,18 @@ internal fun SemgusNonTerminal.toSketchNonTerminal(): NonTerminal {
 internal fun SemanticRule.toSketchRule(nts: Map<String, NonTerminal>): Rule {
   // TODO: Why can't we have an expression in the childNT call?
 
-  val nt = nts[this.head.name]
+  val nt = nts[this.head().name()]
     ?: throw NoSuchElementException("Cannot find the head non-terminal")
 
   fun childNTs(bodyRel: RelationApp): NonTerminal {
-    val childNT = nts[bodyRel.name]
+    val childNT = nts[bodyRel.name()]
       ?: throw NoSuchElementException("Cannot find the child non-terminal")
 
     val ordVars = childNT.ordVars
       .mapIndexed { i, v ->
         Var(
           v.decl,
-          bodyRel.arguments[i].name,
+          bodyRel.arguments()[i].name(),
           v.attrs,
         )
       }
@@ -135,7 +135,7 @@ internal fun SemanticRule.toSketchRule(nts: Map<String, NonTerminal>): Rule {
     )
   }
 
-  val childNTs = this.bodyRelations.asSequence()
+  val childNTs = this.bodyRelations().asSequence()
     .map { childNTs(bodyRel = it) }
 
   // TODO: Use topological sort to resolve the bindings from the CHC constraint.
@@ -149,7 +149,7 @@ internal fun SemanticRule.toSketchRule(nts: Map<String, NonTerminal>): Rule {
 }
 
 internal fun SemgusNonTerminal.firstSemRule(): SemanticRule =
-  this.productions.values.first().semanticRules.first()
+  this.productions().values.first().semanticRules().first()
 
 internal fun param(typedVar: TypedVar) =
-  paramPlain(id(identifier = typedVar.type), typedVar.name)
+  paramPlain(id(identifier = typedVar.type()), typedVar.name())
