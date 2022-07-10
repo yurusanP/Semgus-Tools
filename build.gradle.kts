@@ -1,8 +1,10 @@
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   id("java-library")
   id("idea")
+  kotlin("jvm") version "1.7.0"
 }
 
 var deps: Properties by rootProject.ext
@@ -18,6 +20,7 @@ subprojects {
   apply {
     plugin("java-library")
     plugin("idea")
+    plugin("kotlin")
   }
 
   val javaVersion = 17
@@ -50,5 +53,9 @@ subprojects {
   tasks.withType<JavaExec>().configureEach {
     jvmArgs = listOf("--enable-preview")
     enableAssertions = true
+  }
+
+  tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
   }
 }
