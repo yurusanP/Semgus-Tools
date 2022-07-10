@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cc2298f5-0a02-462c-982f-6b60498d2075" name="Changes" comment="refactor: pretty and most parts of sketch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/Sketch.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/Sketch.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/syntax/Stmt.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/syntax/Stmt.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/frontend/Distiller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/ir/NonTerminal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Evaluator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/Evaluator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/NTStmtsBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/NTStmtsBuilder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/SyntaxBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/semgus-sketch/src/main/java/org/semgus/sketch/util/SyntaxBuilder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +153,7 @@
       <command value="gradle build" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.BasicTest.testSumByWhile">
+  <component name="RunManager" selected="Gradle.BasicTest.testMax2ExpForall">
     <configuration name="BasicTest.testMax2Exp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -267,10 +269,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BasicTest.testMax2ExpForall" />
         <item itemvalue="Gradle.BasicTest.testSumByWhile" />
         <item itemvalue="Gradle.semgus-tools [build]" />
         <item itemvalue="Gradle.BasicTest.testMax2Pair" />
-        <item itemvalue="Gradle.BasicTest.testMax2ExpForall" />
         <item itemvalue="Gradle.BasicTest.testMax2Exp" />
       </list>
     </recent_temporary>

@@ -67,17 +67,16 @@ internal fun SemgusNonTerminal.toSketchNonTerminal(): NonTerminal {
       )
     }
 
-  val params = fullVars
-    .map { (typedVar, annVar) -> param(typedVar = typedVar) to annVar }
-    .flatMap { (param, annVar) ->
-      annVar.attributes.keys.asSequence()
-        .map { attr -> attr to param }
-    }
-    .groupingBy { (attr, _) -> attr }
-    .fold(mutableListOf<Param>()) { acc, (_, param) ->
-      acc.apply { this += param }
-    }
-    .mapValues { (_, mutable) -> mutable.asSequence() }
+  val params = buildMap<String, MutableList<Param>> {
+    fullVars
+      .map { (typedVar, annVar) -> param(typedVar = typedVar) to annVar }
+      .forEach { (param, annVar) ->
+        annVar.attributes.keys.forEach { attr ->
+          this.putIfAbsent(attr, mutableListOf())
+          this[attr]!!.add(param)
+        }
+      }
+  }.mapValues { (_, mutable) -> mutable.asSequence() }
 
   return NonTerminal(
     this.name,
