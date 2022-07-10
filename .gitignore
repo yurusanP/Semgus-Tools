@@ -44,3 +44,4 @@ bin/
 ### Our Stuff ##
 /semgus-parser-util/src/main/resources/bin/
 /semgus-test-util/src/main/resources/playground/
+workspace.xml
