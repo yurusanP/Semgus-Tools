@@ -40,6 +40,10 @@ internal data class MutableGraph<T>(
         if (succ.predCnt == 0) vertices0.add(succ)
       }
     }
+
+    if (copy.vertices.any { v -> v.predCnt != 0 }) {
+      throw IllegalStateException("The graph is not a DAG.")
+    }
   }.asSequence()
 }
 
