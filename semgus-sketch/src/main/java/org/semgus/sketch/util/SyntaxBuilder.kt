@@ -28,6 +28,34 @@ internal data class SyntaxBuilder(val problem: Problem, val bnd: Long) {
       )
     }
 
+    fun targetRelDef(): Stmt {
+      val ntVarName = problem.target.nt.ntVarName()
+      val inputs = problem.target.nt.inputs()
+      val outputs = problem.target.nt.outputs()
+
+      val targetVarDef = varDef(
+        decl = paramPlain(
+          type = id(problem.target.nt.name) { withTmpNTType() },
+          name = ntVarName,
+        ),
+        init = appPlain(problem.target.name, inputs.map(::ref)),
+      )
+
+      return fnDef(
+        decl = param(
+          type = idPlain("bit"),
+          id = id(problem.target.nt.name) { withSem() },
+        ),
+        params = inputs + outputs,
+        body = seq(
+          sequenceOf(
+            targetVarDef,
+            aReturn(constraint(ntVarName, outputs)),
+          ),
+        ),
+      )
+    }
+
     fun harnessDef(): Stmt {
       // TODO: What about more than 1 forall... Or hybrid ones...?
       val forall = problem.constraints.singleOrNull().let {
@@ -48,6 +76,6 @@ internal data class SyntaxBuilder(val problem: Problem, val bnd: Long) {
       )
     }
 
-    return seq(ntsStmts + targetDef() + harnessDef())
+    return seq(ntsStmts + targetDef() + targetRelDef() + harnessDef())
   }
 }
