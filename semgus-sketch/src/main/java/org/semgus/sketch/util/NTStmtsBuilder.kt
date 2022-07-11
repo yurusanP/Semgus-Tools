@@ -25,7 +25,7 @@ internal data class NTStmtsBuilder(
 
   private fun ntDef(): Stmt {
     val choice = choice(
-      (0..rules.count()).asSequence()
+      (0 until rules.count()).asSequence()
         .map { id(nt.name) { withRuleIndex(it) } }
         .map { app(fn = it, args = params.map(::ref)) },
     )
