@@ -2,7 +2,6 @@ package org.semgus.sketch.util
 
 import org.semgus.java.`object`.SmtTerm
 import org.semgus.java.`object`.SmtTerm.Application
-import org.semgus.java.`object`.SmtTerm.Application.TypedTerm
 import org.semgus.java.`object`.SmtTerm.CNumber
 import org.semgus.java.`object`.SmtTerm.CString
 import org.semgus.java.`object`.SmtTerm.Quantifier
@@ -14,12 +13,7 @@ import org.semgus.sketch.syntax.*
  */
 internal fun SmtTerm.toExpr(): Expr = when (this) {
   is Application -> (fns[this.name().name()] ?: TODO("Not supported theory $this"))
-    .invoke(
-      this.arguments().asSequence()
-        .map(TypedTerm::term)
-        .map(SmtTerm::toExpr)
-        .toList(),
-    )
+    .invoke(this.arguments().asSequence().map { it.term().toExpr() })
   is Variable -> refPlain(this.name())
   is CNumber -> refPlain(this.value())
   is CString -> refPlain(this.value())
@@ -34,41 +28,47 @@ internal fun SmtTerm.toExpr(): Expr = when (this) {
 /**
  * The helper map for evaluation.
  */
-internal val fns = mutableMapOf<String, (List<Expr>) -> Expr>(
+internal val fns = mutableMapOf<String, (Sequence<Expr>) -> Expr>(
   // Core Theory
   "true" to { refPlain("true") },
   "false" to { refPlain("false") },
-  "and" to { es -> nary(Op.AND, es.asSequence()) },
-  "or" to { es -> nary(Op.OR, es.asSequence()) },
-  "not" to { (x) -> unary(Op.NOT, x) },
-  "!" to { (x) -> unary(Op.NOT, x) },
-  "xor" to { (l, r) -> binary(Op.XOR, l, r) },
+  "and" to { es -> nary(Op.AND, es) },
+  "or" to { es -> nary(Op.OR, es) },
+  "not" to { (iter) -> unary(Op.NOT, iter.next()) },
+  "!" to { (iter) -> unary(Op.NOT, iter.next()) },
+  "xor" to { (iter) -> binary(Op.XOR, iter.next(), iter.next()) },
   // TODO: "=>"?
-  "=" to { (l, r) -> binary(Op.EQ, l, r) },
+  "=" to { (iter) -> binary(Op.EQ, iter.next(), iter.next()) },
   // TODO: "distinct"?
-  "ite" to { (i, t, e) -> ite(i, t, e) },
+  "ite" to { (iter) -> ite(iter.next(), iter.next(), iter.next()) },
 
   // Ints Theory
-  "-" to {
-    if (it.size == 1) {
-      val (x) = it
-      unary(Op.MINUS, x)
-    } else {
-      val (l, r) = it
-      binary(Op.MINUS, l, r)
-    }
+  "-" to { (iter) ->
+    val next = iter.next()
+    if (!iter.hasNext()) unary(Op.MINUS, next)
+    else binary(Op.MINUS, next, iter.next())
   },
-  "+" to { (l, r) -> binary(Op.PLUS, l, r) },
-  "*" to { (l, r) -> binary(Op.TIMES, l, r) },
-  "div" to { (l, r) -> binary(Op.DIV, l, r) },
-  "mod" to { (l, r) -> binary(Op.MOD, l, r) },
-  "abs" to { (x) -> ite(binary(Op.LT, x, refPlain(0)), unary(Op.MINUS, x), x) },
-  "<=" to { (l, r) -> binary(Op.LTE, l, r) },
-  "<" to { (l, r) -> binary(Op.LT, l, r) },
-  ">=" to { (l, r) -> binary(Op.GTE, l, r) },
-  ">" to { (l, r) -> binary(Op.GT, l, r) },
+  "+" to { (iter) -> binary(Op.PLUS, iter.next(), iter.next()) },
+  "*" to { (iter) -> binary(Op.TIMES, iter.next(), iter.next()) },
+  "div" to { (iter) -> binary(Op.DIV, iter.next(), iter.next()) },
+  "mod" to { (iter) -> binary(Op.MOD, iter.next(), iter.next()) },
+  "abs" to { (iter) ->
+    val next = iter.next()
+    ite(binary(Op.LT, next, refPlain(0)), unary(Op.MINUS, next), next)
+  },
+  "<=" to { (iter) -> binary(Op.LTE, iter.next(), iter.next()) },
+  "<" to { (iter) -> binary(Op.LT, iter.next(), iter.next()) },
+  ">=" to { (iter) -> binary(Op.GTE, iter.next(), iter.next()) },
+  ">" to { (iter) -> binary(Op.GT, iter.next(), iter.next()) },
 
   // TODO: Bit Vectors Theory
 
   // TODO: Strings Theory
 )
+
+/**
+ * Makes destructuring a sequence in lambda possible.
+ */
+private operator fun <T> Sequence<T>.component1(): Iterator<T> {
+  return this.iterator()
+}

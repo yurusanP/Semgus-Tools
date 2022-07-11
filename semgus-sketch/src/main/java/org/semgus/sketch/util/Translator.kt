@@ -36,7 +36,7 @@ internal fun SemgusProblem.toSketchProblem(): Problem {
       fn = id(target.nt.name) { withSem() },
       args = es.filterNot {
         it is Expr.Ref && it.id.name == target.name
-      }.asSequence(),
+      },
     )
   }
   fns[target.name] = { refPlain(target.name) }
