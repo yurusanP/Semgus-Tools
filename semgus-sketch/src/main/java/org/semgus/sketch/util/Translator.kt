@@ -30,28 +30,16 @@ internal fun SemgusProblem.toSketchProblem(): Problem {
     ?.let { Target(this.targetName(), it) }
     ?: throw NoSuchElementException("Cannot find target in the non-terminal map.")
 
-  /* TODO: More generally, the evaluated expression should carry more info
-   *       like how we could build the target variable definition.
-   *       The evaluation strategy would be implemented in another PR.
-   *       This is just a workaround for now.
-   *       Also, avoid global state mutation...
-   */
-  fns[target.nt.relName] = {
-    nary(
-      Op.AND,
-      target.nt.outputs().map { v ->
-        binary(
-          Op.EQ,
-          get(
-            idPlain("target"),
-            idPlain(v.id.name),
-          ),
-          refPlain(v.id.name),
-        )
-      },
+  // TODO: Avoid global state mutation...
+  fns[target.nt.relName] = { es ->
+    app(
+      fn = id(target.nt.name) { withSem() },
+      args = es.filterNot {
+        it is Expr.Ref && it.id.name == target.name
+      }.asSequence(),
     )
   }
-  fns[target.name] = { refPlain("") }
+  fns[target.name] = { refPlain(target.name) }
 
   val constraints = this.constraints().asSequence()
     .map { it.toExpr() }

@@ -36,6 +36,20 @@ internal fun unary(op: Op, e: Expr) = Expr.Unary(op, e)
 internal fun binary(op: Op, l: Expr, r: Expr) = Expr.Binary(op, l, r)
 internal fun nary(op: Op, es: Sequence<Expr>) = Expr.Nary(op, es)
 
+internal fun constraint(ntVarName: String, outputs: Sequence<Param>) = nary(
+  op = Op.AND,
+  es = outputs.map { v ->
+    binary(
+      op = Op.EQ,
+      l = get(
+        obj = idPlain(ntVarName),
+        field = idPlain(v.id.name),
+      ),
+      r = refPlain(v.id.name),
+    )
+  },
+)
+
 internal fun ite(i: Expr, t: Expr, e: Expr) = Expr.Ite(i, t, e)
 
 internal fun choice(es: Sequence<Expr>) = Expr.Choice(es)
