@@ -1,5 +1,7 @@
 package org.semgus.sketch.syntax
 
+import org.semgus.sketch.syntax.Op.*
+
 /**
  * Sketch expression.
  */
@@ -8,12 +10,44 @@ internal sealed class Expr : Syntax() {
   data class App(val fn: Id, val args: Sequence<Expr>) : Expr()
   data class Get(val obj: Id, val field: Id) : Expr()
   data class Assign(val l: Id, val r: Expr) : Expr()
-  data class Unary(val op: Op, val e: Expr) : Expr()
-  data class Binary(val op: Op, val l: Expr, val r: Expr) : Expr()
-  data class Nary(val op: Op, val es: Sequence<Expr>) : Expr()
+  sealed class NaryLike(open val op: Op, open val es: Sequence<Expr>) : Expr()
+  data class Unary(override val op: Op, val e: Expr) : NaryLike(op, sequenceOf(e))
+  data class Binary(override val op: Op, val l: Expr, val r: Expr) : NaryLike(op, sequenceOf(l, r))
+  data class Nary(override val op: Op, override val es: Sequence<Expr>) : NaryLike(op, es)
   data class Ite(val i: Expr, val t: Expr, val e: Expr) : Expr()
   data class Choice(val es: Sequence<Expr>) : Expr()
   data class Forall(val binds: Sequence<Param>, val e: Expr) : Expr()
+
+  fun toMap(outVarNames: Set<String>): Map<String, Expr> {
+    val binds = mutableMapOf<String, Expr>()
+    fun aux(e: Expr) {
+      when (e) {
+        is NaryLike -> {
+          when (e.op) {
+            AND -> e.es.forEach { aux(it) }
+            OR -> TODO("Simplify formula in propositional logic")
+            NOT -> TODO("Simplify formula in propositional logic")
+            XOR -> TODO("Simplify formula in propositional logic")
+            EQ -> {
+              val (outExprs, nonOutExprs) = e.es.partition { it is Ref && outVarNames.contains(it.id.name) }
+              outExprs
+                .map { (it as Ref).id.name }
+                .forEach { outIdName ->
+                  nonOutExprs.forEach { nonOutExpr ->
+                    if (binds.containsKey(outIdName)) TODO("Check if resolution is possible.")
+                    binds[outIdName] = nonOutExpr
+                  }
+                }
+            }
+            else -> throw IllegalStateException("Cannot resolve bindings.")
+          }
+        }
+        else -> throw IllegalStateException("Not an expression evaluated from an SMT term.")
+      }
+    }
+    aux(this)
+    return binds.toMap()
+  }
 }
 
 internal fun ref(id: Id) = Expr.Ref(id)
@@ -25,7 +59,7 @@ internal fun app(fn: Id, args: Sequence<Expr>) = Expr.App(fn, args)
 internal fun appPlain(fnName: String, args: Sequence<Expr>) = app(idPlain(fnName), args)
 
 internal fun argsBnded0(args: Sequence<Expr>) = args + refPlain("bnd")
-internal fun argsBnded1(args: Sequence<Expr>) = args + binary(Op.MINUS, refPlain("bnd"), refPlain(1))
+internal fun argsBnded1(args: Sequence<Expr>) = args + binary(MINUS, refPlain("bnd"), refPlain(1))
 
 internal fun get(obj: Id, field: Id) = Expr.Get(obj, field)
 
@@ -37,10 +71,10 @@ internal fun binary(op: Op, l: Expr, r: Expr) = Expr.Binary(op, l, r)
 internal fun nary(op: Op, es: Sequence<Expr>) = Expr.Nary(op, es)
 
 internal fun constraint(ntVarName: String, outputs: Sequence<Param>) = nary(
-  op = Op.AND,
+  op = AND,
   es = outputs.map { v ->
     binary(
-      op = Op.EQ,
+      op = EQ,
       l = get(
         obj = idPlain(ntVarName),
         field = idPlain(v.id.name),

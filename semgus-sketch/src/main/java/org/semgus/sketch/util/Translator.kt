@@ -126,13 +126,47 @@ internal fun SemanticRule.toSketchRule(nts: Map<String, NonTerminal>): Rule {
   val childNTs = this.bodyRelations().asSequence()
     .map { childNTs(bodyRel = it) }
 
-  // TODO: Use topological sort to resolve the bindings from the CHC constraint.
-  val binds = emptyMap<String, Expr>()
+  val constrExpr = this.constraint().toExpr()
+
+  val ranks = MutableGraph<String>().apply {
+    val indices = mutableMapOf<String, Int>()
+
+    childNTs.forEach { childNT ->
+      childNT.ordVars.forEach { v ->
+        if (!indices.containsKey(v.varName)) {
+          indices[v.varName] = this.vertices.size
+          this.addVertex(v.varName)
+        }
+      }
+
+      val (inVars, nonInVars) = childNT.ordVars.partition { v -> v.attrs.contains("input") }
+      val (inVarIndices, nonInVarIndices) =
+        inVars.map(Var::varName).map { indices[it]!! } to nonInVars.map(Var::varName).map { indices[it]!! }
+
+      val ntVarIndex = indices[childNT.ntVarName()]!!
+      nonInVarIndices.forEach { k ->
+        if (k != ntVarIndex) {
+          this.addEdge(k, ntVarIndex)
+          inVarIndices.forEach { i ->
+            this.addEdge(i, k)
+          }
+        }
+      }
+    }
+  }.topoSort().mapIndexed { index, varName ->
+    varName to index
+  }.toMap()
+
+  val binds = constrExpr
+    .toMap(
+      outVarNames = nt.outputs().map { it.id.name }.toSet(),
+    )
 
   return Rule(
     nt,
     childNTs,
     binds,
+    ranks,
   )
 }
 

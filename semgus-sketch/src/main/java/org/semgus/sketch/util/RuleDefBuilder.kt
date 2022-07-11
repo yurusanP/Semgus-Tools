@@ -60,7 +60,12 @@ internal data class RuleDefBuilder(
       ),
       init = app(
         fn = id(ntStmtsBuilder.nt.name) { withTmpNTType() },
-        args = emptySequence(),
+        args = rule.nt.outputs().map { param ->
+          assignPlain(
+            lName = param.id.name,
+            r = rule.binds[param.id.name] ?: throw NoSuchElementException("No resolved corresponding binding."),
+          )
+        },
       ),
     )
 
