@@ -18,7 +18,7 @@ internal data class SyntaxBuilder(val problem: Problem, val bnd: Long) {
         params = inputs,
         body = sBndDefed(
           aReturn(
-            appPlain(
+            callPlain(
               fnName = problem.target.nt.name,
               args = argsBnded0(inputs.map(::ref)),
             ),
@@ -38,11 +38,11 @@ internal data class SyntaxBuilder(val problem: Problem, val bnd: Long) {
           type = id(problem.target.nt.name) { withTmpNTType() },
           name = ntVarName,
         ),
-        init = appPlain(problem.target.name, inputs.map(::ref)),
+        init = callPlain(problem.target.name, inputs.map(::ref)),
       )
 
       return fnDef(
-        decl = bitPlain("Sem_target"),
+        decl = bitPlain("target_Sem"),
         params = inputs + outputs,
         body = seq(
           sequenceOf(

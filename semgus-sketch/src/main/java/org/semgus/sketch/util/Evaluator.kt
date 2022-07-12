@@ -14,9 +14,9 @@ import org.semgus.sketch.syntax.Op.*
  */
 internal fun SmtTerm.toExpr(): Expr = when (this) {
   is Application -> (toExprMap[this.name().name()] ?: { es ->
-    app(
-      fn = idPlain("Sem_target"),
-      args = es.filterNot { it is Expr.App },
+    call(
+      fn = idPlain("target_Sem"),
+      args = es.filterNot { it is Expr.Call },
     )
   }).invoke(this.arguments().asSequence().map { it.term().toExpr() })
   is Variable -> refPlain(this.name())

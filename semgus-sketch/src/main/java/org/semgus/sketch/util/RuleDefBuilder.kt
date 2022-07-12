@@ -33,7 +33,7 @@ internal data class RuleDefBuilder(
 
     val childNTVarDef = varDef(
       decl = paramPlain(id(childNT.name) { withTmpNTType() }, childNTVarName),
-      init = appPlain(fnName = childNT.name, args = argsBnded1(ntStmtsBuilder.inputs.map(::ref))),
+      init = callPlain(fnName = childNT.name, args = argsBnded1(ntStmtsBuilder.inputs.map(::ref))),
     )
 
     fun childNTSubst(v: Var): Stmt? =
@@ -55,7 +55,7 @@ internal data class RuleDefBuilder(
     // TODO: Some binding keys are not output variables.
     return sequenceOf(
       aReturn(
-        appWithField(
+        callWithFields(
           fn = id(ntStmtsBuilder.nt.name) { withTmpNTType() },
           args = outputs.map { (rule.binds[it.id.name] ?: refPlain(it.id.name)) },
           fieldParams = outputs,

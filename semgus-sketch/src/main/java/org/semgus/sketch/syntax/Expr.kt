@@ -7,7 +7,7 @@ import org.semgus.sketch.syntax.Op.*
  */
 internal sealed class Expr : Syntax() {
   data class Ref(val id: Id) : Expr()
-  data class App(val fn: Id, val args: Sequence<Expr>) : Expr()
+  data class Call(val fn: Id, val args: Sequence<Expr>) : Expr()
   data class Get(val obj: Id, val field: Id) : Expr()
   data class Assign(val l: Id, val r: Expr) : Expr()
   sealed class NaryLike(open val op: Op, open val es: Sequence<Expr>) : Expr()
@@ -55,10 +55,10 @@ internal fun ref(param: Param) = ref(param.id)
 internal fun refPlain(s: String) = ref(idPlain(s))
 internal fun refPlain(n: Long) = ref(idPlain(n))
 
-internal fun app(fn: Id, args: Sequence<Expr>) = Expr.App(fn, args)
-internal fun appPlain(fnName: String, args: Sequence<Expr>) = app(idPlain(fnName), args)
+internal fun call(fn: Id, args: Sequence<Expr>) = Expr.Call(fn, args)
+internal fun callPlain(fnName: String, args: Sequence<Expr>) = call(idPlain(fnName), args)
 
-internal fun appWithField(fn: Id, args: Sequence<Expr>, fieldParams: Sequence<Param>) = app(
+internal fun callWithFields(fn: Id, args: Sequence<Expr>, fieldParams: Sequence<Param>) = call(
   fn,
   args = args
     .zip(fieldParams)

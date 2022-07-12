@@ -21,7 +21,7 @@ internal fun Syntax.distill(): Code = when (this) {
   )
 
   is Expr.Ref -> this.id.distill()
-  is Expr.App -> hcat(
+  is Expr.Call -> hcat(
     this.fn.distill(),
     tuple0(this.args.distill()),
   )
