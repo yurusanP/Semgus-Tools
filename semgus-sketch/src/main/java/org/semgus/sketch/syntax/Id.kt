@@ -79,6 +79,10 @@ internal fun MutableList<IdProp>.withNTType() {
   this.withPostfix("_t")
 }
 
+internal fun MutableList<IdProp>.withField() {
+  this.withPostfix("_field")
+}
+
 internal fun MutableList<IdProp>.withRuleIndex(i: Int) {
   this.withPostfix("_rule$i")
 }

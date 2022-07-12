@@ -40,7 +40,7 @@ internal data class RuleDefBuilder(
       if (!v.attrs.contains("output")) null
       else varDef(
         decl = paramPlain(type = v.decl.type, name = v.varName),
-        init = get(obj = idPlain(childNTVarName), field = idPlain(v.decl.id.name)),
+        init = getPlain(obj = idPlain(childNTVarName), fieldName = v.decl.id.name),
       )
 
     val childNTSubsts = childNT.ordVars
@@ -50,25 +50,17 @@ internal data class RuleDefBuilder(
   }
 
   private fun ntVarStmts(): Sequence<Stmt> {
-    val ntVarName = ntStmtsBuilder.nt.ntVarName()
+    val outputs = rule.nt.outputs()
 
-    // TODO: args using constraints.
-    val ntVarDef = varDef(
-      decl = paramPlain(
-        type = id(ntStmtsBuilder.nt.name) { withTmpNTType() },
-        name = ntVarName,
-      ),
-      init = app(
-        fn = id(ntStmtsBuilder.nt.name) { withTmpNTType() },
-        args = rule.nt.outputs().map { param ->
-          assignPlain(
-            lName = param.id.name,
-            r = rule.binds[param.id.name] ?: throw NoSuchElementException("No resolved corresponding binding."),
-          )
-        },
+    // TODO: Some binding keys are not output variables.
+    return sequenceOf(
+      aReturn(
+        appWithField(
+          fn = id(ntStmtsBuilder.nt.name) { withTmpNTType() },
+          args = outputs.map { (rule.binds[it.id.name] ?: refPlain(it.id.name)) },
+          fieldParams = outputs,
+        ),
       ),
     )
-
-    return sequenceOf(ntVarDef, aReturn(refPlain(ntVarName)))
   }
 }

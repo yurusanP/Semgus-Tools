@@ -58,10 +58,21 @@ internal fun refPlain(n: Long) = ref(idPlain(n))
 internal fun app(fn: Id, args: Sequence<Expr>) = Expr.App(fn, args)
 internal fun appPlain(fnName: String, args: Sequence<Expr>) = app(idPlain(fnName), args)
 
+internal fun appWithField(fn: Id, args: Sequence<Expr>, fieldParams: Sequence<Param>) = app(
+  fn,
+  args = args
+    .zip(fieldParams)
+    .map { (arg, fieldParam) ->
+      assign(id(fieldParam.id.name) { withField() }, arg)
+    },
+)
+
 internal fun argsBnded0(args: Sequence<Expr>) = args + refPlain("bnd")
 internal fun argsBnded1(args: Sequence<Expr>) = args + binary(MINUS, refPlain("bnd"), refPlain(1))
 
 internal fun get(obj: Id, field: Id) = Expr.Get(obj, field)
+
+internal fun getPlain(obj: Id, fieldName: String) = get(obj, id(fieldName) { withField() })
 
 internal fun assign(l: Id, r: Expr) = Expr.Assign(l, r)
 internal fun assignPlain(lName: String, r: Expr) = assign(idPlain(lName), r)
@@ -75,9 +86,9 @@ internal fun constraint(ntVarName: String, outputs: Sequence<Param>) = nary(
   es = outputs.map { v ->
     binary(
       op = EQ,
-      l = get(
+      l = getPlain(
         obj = idPlain(ntVarName),
-        field = idPlain(v.id.name),
+        fieldName = v.id.name,
       ),
       r = refPlain(v.id.name),
     )

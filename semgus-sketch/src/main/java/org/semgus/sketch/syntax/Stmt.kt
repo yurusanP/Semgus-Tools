@@ -21,8 +21,13 @@ internal fun bndDef(bnd: Long) = varDef(intPlain("bnd"), refPlain(bnd))
 internal fun fnDef(decl: Param, params: Sequence<Param>, body: Stmt) = Stmt.FnDef(decl, params, body)
 
 internal fun structDef(id: Id, fields: Sequence<Param>) = Stmt.StructDef(id, fields)
-internal fun ntTypeDef(ntName: String, fields: Sequence<Param>) =
-  structDef(id(ntName) { withNTType() }, fields)
+internal fun ntTypeDef(ntName: String, fieldParams: Sequence<Param>) =
+  structDef(
+    id = id(ntName) { withNTType() },
+    fields = fieldParams.map { fieldParam ->
+      param(fieldParam.type, id(fieldParam.id.name) { withField() })
+    },
+  )
 
 internal fun atomic(prefix: Id, e: Expr) = Stmt.Atomic(prefix, e)
 internal fun aAssert(e: Expr) = atomic(idPlain("assert"), e)
