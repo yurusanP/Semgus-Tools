@@ -144,14 +144,8 @@ internal fun SemanticRule.toSketchRule(nts: Map<String, NonTerminal>): Rule {
         inVars.map(Var::varName).map { indices[it]!! } to nonInVars.map(Var::varName).map { indices[it]!! }
 
       val ntVarIndex = indices[childNT.ntVarName()]!!
-      nonInVarIndices.forEach { k ->
-        if (k != ntVarIndex) {
-          this.addEdge(k, ntVarIndex)
-          inVarIndices.forEach { i ->
-            this.addEdge(i, k)
-          }
-        }
-      }
+      inVarIndices.forEach { i -> this.addEdge(i, ntVarIndex) }
+      nonInVarIndices.forEach { i -> if (i != ntVarIndex) this.addEdge(ntVarIndex, i) }
     }
   }.topoSort().mapIndexed { index, varName ->
     varName to index
