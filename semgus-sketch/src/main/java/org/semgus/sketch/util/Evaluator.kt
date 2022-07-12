@@ -13,8 +13,12 @@ import org.semgus.sketch.syntax.Op.*
  * Evaluates SMT terms to Sketch expressions.
  */
 internal fun SmtTerm.toExpr(): Expr = when (this) {
-  is Application -> (fns[this.name().name()] ?: TODO("Not supported theory $this"))
-    .invoke(this.arguments().asSequence().map { it.term().toExpr() })
+  is Application -> (toExprMap[this.name().name()] ?: { es ->
+    app(
+      fn = idPlain("Sem_target"),
+      args = es.filterNot { it is Expr.App },
+    )
+  }).invoke(this.arguments().asSequence().map { it.term().toExpr() })
   is Variable -> refPlain(this.name())
   is CNumber -> refPlain(this.value())
   is CString -> refPlain(this.value())
@@ -29,7 +33,7 @@ internal fun SmtTerm.toExpr(): Expr = when (this) {
 /**
  * The helper map for evaluation.
  */
-internal val fns = mutableMapOf<String, (Sequence<Expr>) -> Expr>(
+internal val toExprMap = mapOf<String, (Sequence<Expr>) -> Expr>(
   // Core Theory
   "true" to { refPlain("true") },
   "false" to { refPlain("false") },

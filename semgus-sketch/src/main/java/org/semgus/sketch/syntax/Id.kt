@@ -71,10 +71,6 @@ internal fun MutableList<IdProp>.withHarness() {
   this.withPrefix("harness")
 }
 
-internal fun MutableList<IdProp>.withSem() {
-  this.withPostfix("_Sem")
-}
-
 internal fun MutableList<IdProp>.withNTType() {
   this.withPostfix("_t")
 }

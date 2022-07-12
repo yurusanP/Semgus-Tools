@@ -30,17 +30,6 @@ internal fun SemgusProblem.toSketchProblem(): Problem {
     ?.let { Target(this.targetName(), it) }
     ?: throw NoSuchElementException("Cannot find target in the non-terminal map.")
 
-  // TODO: Avoid global state mutation...
-  fns[target.nt.relName] = { es ->
-    app(
-      fn = id(target.nt.name) { withSem() },
-      args = es.filterNot {
-        it is Expr.Ref && it.id.name == target.name
-      },
-    )
-  }
-  fns[target.name] = { refPlain(target.name) }
-
   val constraints = this.constraints().asSequence()
     .map { it.toExpr() }
 

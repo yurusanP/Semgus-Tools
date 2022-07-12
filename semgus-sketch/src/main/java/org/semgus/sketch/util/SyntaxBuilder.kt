@@ -42,10 +42,7 @@ internal data class SyntaxBuilder(val problem: Problem, val bnd: Long) {
       )
 
       return fnDef(
-        decl = param(
-          type = idPlain("bit"),
-          id = id(problem.target.nt.name) { withSem() },
-        ),
+        decl = bitPlain("Sem_target"),
         params = inputs + outputs,
         body = seq(
           sequenceOf(
