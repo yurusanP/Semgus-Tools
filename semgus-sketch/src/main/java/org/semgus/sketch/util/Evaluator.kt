@@ -1,34 +1,11 @@
 package org.semgus.sketch.util
 
-import org.semgus.java.`object`.SmtTerm
-import org.semgus.java.`object`.SmtTerm.Application
-import org.semgus.java.`object`.SmtTerm.CNumber
-import org.semgus.java.`object`.SmtTerm.CString
-import org.semgus.java.`object`.SmtTerm.Quantifier
-import org.semgus.java.`object`.SmtTerm.Variable
-import org.semgus.sketch.syntax.*
+import org.semgus.sketch.base.syntax.*
 
 /**
- * Evaluates SMT terms to Sketch expressions.
+ * The map for evaluating SMT terms into Sketch expressions.
  */
-internal fun SmtTerm.toExpr(): Expr = when (this) {
-  is Application -> (fns[this.name().name()] ?: TODO("Not supported theory $this"))
-    .invoke(this.arguments().asSequence().map { it.term().toExpr() })
-  is Variable -> refPlain(this.name())
-  is CNumber -> refPlain(this.value())
-  is CString -> refPlain(this.value())
-  // TODO: What about exists?
-  is Quantifier -> forall(
-    binds = this.bindings().asSequence().map { typedVar -> param(typedVar) },
-    e = this.child().toExpr(),
-  )
-  else -> throw IllegalStateException("Unexpected value: $this")
-}
-
-/**
- * The helper map for evaluation.
- */
-internal val fns = mutableMapOf<String, (Sequence<Expr>) -> Expr>(
+internal val toSketchExprMap = mapOf<String, (Sequence<Expr>) -> Expr>(
   // Core Theory
   "true" to { refPlain("true") },
   "false" to { refPlain("false") },

@@ -6,7 +6,7 @@ import org.semgus.java.problem.ProblemGenerator;
 import org.semgus.java.problem.SemgusProblem;
 import org.semgus.java.util.DeserializationException;
 import org.semgus.parser.util.Runner;
-import org.semgus.sketch.Sketch;
+import org.semgus.sketch.SketchKt;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -47,7 +47,7 @@ public interface TestResources {
   static void debug(@NotNull String inputName, int bnd) {
     var json = TestResources.getJson(inputName);
     var problem = TestResources.getSemgusProblem(json);
-    var sketch = Sketch.Companion.fromSemgusProblem(problem, bnd);
+    var sketch = SketchKt.fromSemgusProblem(problem, bnd);
     System.out.println(sketch.dump());
   }
 }

@@ -1,4 +1,4 @@
-package org.semgus.sketch.syntax
+package org.semgus.sketch.base.syntax
 
 import org.semgus.java.`object`.Identifier
 
@@ -15,7 +15,7 @@ internal inline fun id(name: String, builderAction: MutableList<IdProp>.() -> Un
   id(name, buildProps(builderAction))
 
 internal fun idPlain(s: String) = Id(s, emptySequence())
-internal fun idPlain(n: Long) = idPlain(n.toString())
+internal fun idPlain(n: Number) = idPlain(n.toString())
 
 // TODO: Should investigate later.
 internal fun id(identifier: Identifier): Id {
@@ -71,12 +71,12 @@ internal fun MutableList<IdProp>.withHarness() {
   this.withPrefix("harness")
 }
 
-internal fun MutableList<IdProp>.withSem() {
-  this.withPostfix("_Sem")
-}
-
 internal fun MutableList<IdProp>.withNTType() {
   this.withPostfix("_t")
+}
+
+internal fun MutableList<IdProp>.withField() {
+  this.withPostfix("_field")
 }
 
 internal fun MutableList<IdProp>.withRuleIndex(i: Int) {

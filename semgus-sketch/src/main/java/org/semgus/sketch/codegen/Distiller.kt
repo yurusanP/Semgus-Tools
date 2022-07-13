@@ -1,10 +1,10 @@
-package org.semgus.sketch.frontend
+package org.semgus.sketch.codegen
 
 import org.semgus.pretty.*
-import org.semgus.sketch.syntax.*
+import org.semgus.sketch.base.syntax.*
 
 /**
- * Frontend of sketch syntax.
+ * Frontend of Sketch syntax.
  */
 internal fun Syntax.distill(): Code = when (this) {
   is Id -> props.fold(plain(this.name) as Code) { acc, prop ->
@@ -21,14 +21,14 @@ internal fun Syntax.distill(): Code = when (this) {
   )
 
   is Expr.Ref -> this.id.distill()
-  is Expr.App -> hcat(
+  is Expr.Call -> hcat(
     this.fn.distill(),
     tuple0(this.args.distill()),
   )
-  is Expr.Get -> hcat(
-    this.obj.distill(),
+  is Expr.Dot -> hcat(
+    this.l.distill(),
     plain('.'),
-    this.field.distill(),
+    this.r.distill(),
   )
   is Expr.Assign -> hsep(
     this.l.distill(),
@@ -85,15 +85,10 @@ internal fun Syntax.distill(): Code = when (this) {
     ),
     this.body.distill(),
   )
-  is Stmt.StructDef -> block(
+  is Stmt.BlockDef -> block(
     2,
-    hsep(
-      plain("struct"),
-      this.id.distill(),
-    ),
-    vsep(
-      this.fields.distill().map(::semi),
-    ),
+    hsep(plain("struct"), this.prefix.distill()),
+    vsep(this.decls.distill().map(::semi)),
   )
   is Stmt.Atomic -> semi(
     hsep(

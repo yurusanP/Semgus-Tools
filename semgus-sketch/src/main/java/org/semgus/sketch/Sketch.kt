@@ -2,24 +2,20 @@ package org.semgus.sketch
 
 import org.semgus.java.problem.SemgusProblem
 import org.semgus.pretty.stringPretty
-import org.semgus.sketch.syntax.Syntax
-import org.semgus.sketch.util.toSketchProblem
-import org.semgus.sketch.util.SyntaxBuilder
+import org.semgus.sketch.base.syntax.Syntax
+import org.semgus.sketch.codegen.SyntaxGen
+import org.semgus.sketch.translator.toSketchProblem
 
 /**
  * Sketch program.
  */
 class Sketch {
-  private lateinit var syntax: Syntax
+  internal lateinit var syntax: Syntax
 
   fun dump() = syntax.codify().stringPretty()
+}
 
-  companion object {
-    fun fromSemgusProblem(semgusProblem: SemgusProblem, bnd: Long): Sketch {
-      val sketchProblem = semgusProblem.toSketchProblem()
-      return Sketch().apply {
-        this.syntax = SyntaxBuilder(sketchProblem, bnd).build()
-      }
-    }
-  }
+fun fromSemgusProblem(semgusProblem: SemgusProblem, bnd: Int) = Sketch().apply {
+  val sketchProblem = semgusProblem.toSketchProblem()
+  this.syntax = SyntaxGen(sketchProblem, bnd).gen()
 }

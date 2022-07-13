@@ -1,4 +1,4 @@
-package org.semgus.sketch.ir
+package org.semgus.sketch.base.ir
 
 /**
  * IR target.

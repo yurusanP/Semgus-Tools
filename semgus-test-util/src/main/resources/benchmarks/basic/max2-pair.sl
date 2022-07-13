@@ -100,8 +100,9 @@
 ;;; Constraints - examples
 ;;;
 (constraint (E.Sem max2 4 2 3 2 4 2))
-(constraint (E.Sem max2 2 5 6 0 2 5))
+(constraint (E.Sem max2 2 5 6 0 6 0))
 (constraint (E.Sem max2 2 (+ 3 4) 1 1 2 7))
+(constraint (E.Sem max2 1 3 1 1 1 3))
 
 ;;;
 ;;; Instruct the solver to find max2

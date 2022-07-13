@@ -1,4 +1,4 @@
-package org.semgus.sketch.syntax
+package org.semgus.sketch.base.syntax
 
 /**
  * Sketch parameter.
