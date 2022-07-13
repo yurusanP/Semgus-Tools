@@ -1,7 +1,7 @@
-package org.semgus.sketch.syntax
+package org.semgus.sketch.base.syntax
 
 import org.semgus.pretty.Prettiable
-import org.semgus.sketch.frontend.distill
+import org.semgus.sketch.codegen.distill
 
 /**
  * Sketch syntax.

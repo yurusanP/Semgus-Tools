@@ -1,4 +1,4 @@
-package org.semgus.sketch.syntax
+package org.semgus.sketch.base.syntax
 
 import org.semgus.java.`object`.Identifier
 
@@ -15,7 +15,7 @@ internal inline fun id(name: String, builderAction: MutableList<IdProp>.() -> Un
   id(name, buildProps(builderAction))
 
 internal fun idPlain(s: String) = Id(s, emptySequence())
-internal fun idPlain(n: Long) = idPlain(n.toString())
+internal fun idPlain(n: Number) = idPlain(n.toString())
 
 // TODO: Should investigate later.
 internal fun id(identifier: Identifier): Id {

@@ -3,45 +3,45 @@ package org.semgus.sketch.util
 /**
  * Mutable graph.
  */
-internal data class MutableGraph<T>(
-  val vertices: MutableList<MutableVertex<T>> = mutableListOf(),
+internal data class MutableGraph<K, V>(
+  val vertices: MutableMap<K, MutableVertex<K, V>> = mutableMapOf(),
 ) {
-  fun addVertex(data: T): Boolean {
-    val vertex = MutableVertex(
-      index = vertices.size,
-      data,
-      succIndices = mutableListOf(),
-      predCnt = 0,
-    )
-    return vertices.add(vertex)
-  }
+  fun addVertex(key: K, value: MutableVertex<K, V> = MutableVertex()) =
+    vertices.putIfAbsent(key, value) == null
 
-  fun addEdge(srcIndex: Int, dstIndex: Int): Boolean {
-    vertices[dstIndex].predCnt += 1
-    return vertices[srcIndex].succIndices.add(dstIndex)
-  }
+  fun addEdge(srcKey: K, dstKey: K) = vertices[srcKey]?.let { src ->
+    vertices[dstKey]?.let { dst ->
+      dst.predCnt += 1
+      src.succKeys.add(dstKey)
+    }
+  } ?: false
 
   /**
    * Sorts a graph topologically.
    * It assumes that the graph is a DAG.
    */
-  fun topoSort() = buildList {
+  fun toSortedList() = buildList {
     val copy = this@MutableGraph.copy()
 
-    // vertices with 0 in-degree
-    val vertices0 = copy.vertices.filter { it.predCnt == 0 }.toMutableList()
+    // vertex keys with 0 in-degree
+    val keys0 = ArrayDeque(
+      copy.vertices.asSequence()
+        .filter { (_, v) -> v.predCnt == 0 }
+        .map { (k, _) -> k }
+        .toList()
+    )
 
-    while (vertices0.isNotEmpty()) {
-      val curr = vertices0.removeLast()
-      this.add(curr.data)
-      curr.succIndices.forEach { succIndex ->
-        val succ = copy.vertices[succIndex]
+    while (keys0.isNotEmpty()) {
+      val curr = keys0.removeFirst()
+      this@buildList.add(curr)
+      vertices[curr]!!.succKeys.forEach { succKey ->
+        val succ = vertices[succKey]!!
         succ.predCnt -= 1
-        if (succ.predCnt == 0) vertices0.add(succ)
+        if (succ.predCnt == 0) keys0.addLast(succKey)
       }
     }
 
-    if (copy.vertices.any { v -> v.predCnt != 0 }) {
+    if (copy.vertices.values.any { v -> v.predCnt != 0 }) {
       throw IllegalStateException("The graph is not a DAG.")
     }
   }
@@ -50,9 +50,8 @@ internal data class MutableGraph<T>(
 /**
  * Mutable vertex.
  */
-internal data class MutableVertex<T>(
-  val index: Int,
-  val data: T,
-  val succIndices: MutableList<Int>,
-  var predCnt: Int,
+internal data class MutableVertex<K, V>(
+  val data: V? = null,
+  val succKeys: MutableList<K> = mutableListOf(),
+  var predCnt: Int = 0,
 )
