@@ -30,5 +30,8 @@
 (synth-fun or2() BV)
 
 (constraint (BV.Sem or2 #b00001111 #b11110000 #b11111111))
+(constraint (BV.Sem or2 #b00101011 #b10110000 #b10111011))
+(constraint (BV.Sem or2 #x12 #x34 #x36))
+(constraint (BV.Sem or2 #xAB #xCD #xEF))
 
 (check-synth)
