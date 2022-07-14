@@ -68,6 +68,11 @@ internal fun Syntax.distill(): Code = when (this) {
     this.es.distill(),
   )
   is Expr.Forall -> this.e.distill()
+  is Expr.Bitvec -> set0(
+    (this.sz - 1 downTo 0).asSequence().map { pos ->
+      plain(if (this.bs.get(pos)) '1' else '0')
+    },
+  )
 
   Stmt.Skip -> empty()
   is Stmt.VarDef -> semi(

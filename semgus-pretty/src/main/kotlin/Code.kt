@@ -111,6 +111,22 @@ fun tuple0(xs: Sequence<Code>) = hcatEncloseDelim(
   xs,
 )
 
+fun set(xs: Sequence<Code>) = group(
+  hcatEncloseDelim(
+    flatAlt(plain("{ "), plain('{')),
+    flatAlt(plain(" }"), plain('}')),
+    plain(", "),
+    xs,
+  ),
+)
+
+fun set0(xs: Sequence<Code>) = hcatEncloseDelim(
+  plain('{'),
+  plain('}'),
+  plain(", "),
+  xs,
+)
+
 fun block(i: Int, prefix: Code, body: Code) = hcat(
   hsep(prefix, plain('{')),
   nest(i, hcat(line(), body)),

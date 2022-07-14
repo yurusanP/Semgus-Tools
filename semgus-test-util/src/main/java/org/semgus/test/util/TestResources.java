@@ -46,6 +46,7 @@ public interface TestResources {
 
   static void debug(@NotNull String inputName, int bnd) {
     var json = TestResources.getJson(inputName);
+    System.out.println(json);
     var problem = TestResources.getSemgusProblem(json);
     var sketch = SketchKt.fromSemgusProblem(problem, bnd);
     System.out.println(sketch.dump());
