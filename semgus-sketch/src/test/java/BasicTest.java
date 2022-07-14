@@ -3,10 +3,10 @@ import org.semgus.test.util.TestResources;
 
 public class BasicTest {
   /**
-   * TODO: Not solved.
+   * Solved.
    */
   @Test public void testImpvDemo() {
-    TestResources.debug("/benchmarks/basic/impv-demo.sl", 3);
+    TestResources.debug("/benchmarks/basic/impv-demo.sl", 4);
   }
 
   /**
