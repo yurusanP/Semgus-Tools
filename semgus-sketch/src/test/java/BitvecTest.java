@@ -8,4 +8,8 @@ public class BitvecTest {
   @Test public void testOr2Bitvec() {
     TestResources.debug("/benchmarks/bitvec/or2-bitvec.sl", 3);
   }
+
+  @Test public void testXor2Bitvec() {
+    TestResources.debug("/benchmarks/bitvec/xor2-bitvec.sl", 4);
+  }
 }
