@@ -32,7 +32,7 @@ internal data class RuleDefGen(
   }
 
   /**
-   * Statements about head non-terminals.
+   * Statements about a head non-terminal.
    */
   private fun stmtsHeadNT() = with(rule.headNT) {
     val ntType = id(name) { withTmpNTType() }
