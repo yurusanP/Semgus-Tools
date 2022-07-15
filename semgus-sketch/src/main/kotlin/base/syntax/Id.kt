@@ -1,7 +1,5 @@
 package org.semgus.sketch.base.syntax
 
-import org.semgus.java.`object`.Identifier
-
 /**
  * Sketch identifier.
  */
@@ -16,26 +14,6 @@ internal inline fun id(name: String, builderAction: MutableList<IdProp>.() -> Un
 
 internal fun idPlain(s: String) = Id(s, emptySequence())
 internal fun idPlain(n: Number) = idPlain(n.toString())
-
-// TODO: Should investigate later.
-internal fun id(identifier: Identifier): Id {
-  val name = when (identifier.name()) {
-    "Int" -> "int"
-    "Bool" -> "bit"
-    else -> identifier.name()
-  }
-
-//   TODO: Useful for bit vectors.
-//   var attributes = Stream.of(id.indices())
-//     .map(n -> (Attr) switch (n) {
-//       case Identifier.Index.NInt ni -> new Attr.AInt(ni.value());
-//       case Identifier.Index.NString ns -> new Attr.AString(ns.value());
-//       default -> throw new IllegalStateException("Unexpected value: " + n);
-//     })
-//     .toArray(Attr[]::new);
-
-  return idPlain(name)
-}
 
 /**
  * Sketch identifier properties.
@@ -86,4 +64,8 @@ internal fun MutableList<IdProp>.withRuleIndex(i: Int) {
 internal fun MutableList<IdProp>.withTmpNTType() {
   this.withNTType()
   this.withTmpStruct()
+}
+
+internal fun MutableList<IdProp>.withBVSize(sz: Int) {
+  this.withPostfix("[$sz]")
 }

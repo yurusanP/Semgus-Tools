@@ -66,7 +66,7 @@ internal data class SyntaxGen(
     )
 
     fnDef(
-      decl = bitPlain("target_Sem"),
+      decl = bitPlain("Target_Sem"),
       params = nt.vars.filterNot { it == nt.aux }.decls(),
       body = seqWith(targetAuxDef) { this + aReturn(retExpr) },
     )

@@ -1,6 +1,7 @@
 package org.semgus.sketch.base.syntax
 
 import org.semgus.sketch.base.syntax.Op.*
+import java.util.BitSet
 
 /**
  * Sketch expression.
@@ -16,6 +17,7 @@ internal sealed class Expr : Syntax() {
   data class Ite(val i: Expr, val t: Expr, val e: Expr) : Expr()
   data class Choice(val es: Sequence<Expr>) : Expr()
   data class Forall(val binds: Sequence<Param>, val e: Expr) : Expr()
+  data class Bitvec(val bs: BitSet, val sz: Int) : Expr()
 }
 
 internal fun ref(id: Id) = Expr.Ref(id)
@@ -50,3 +52,5 @@ internal fun ite(i: Expr, t: Expr, e: Expr) = Expr.Ite(i, t, e)
 internal fun choice(es: Sequence<Expr>) = Expr.Choice(es)
 
 internal fun forall(binds: Sequence<Param>, e: Expr) = Expr.Forall(binds, e)
+
+internal fun bitvec(bs: BitSet, sz: Int) = Expr.Bitvec(bs, sz)

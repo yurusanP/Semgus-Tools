@@ -20,4 +20,11 @@ internal enum class Op(val s: String) {
   LT("<"),
   GTE(">="),
   GT(">"),
+
+  BVAND("&"),
+  BVOR("|"),
+  SHL("<<"),
+  SHR(">>"),
+
+//  `___`("_TODO_")
 }

@@ -27,7 +27,7 @@ data class ProblemTrans(val semgusProblem: SemgusProblem) {
   }
 
   private val constraints = semgusProblem.constraints().asSequence()
-    .map { it.toSketchExpr() }
+    .map { it.toSketchExpr(target) }
 
   internal fun trans() = Problem(
     semNameToNT,
